@@ -9,13 +9,10 @@ import (
 	telebot "gopkg.in/telebot.v3"
 	"log"
 	"os"
-	"time"
-)
 
 var (
 	//Get token from env
-	token = os.Getenv("TOKEN")
-)
+	token = os.Getenv("TELE_TOKEN")
 
 // kbotCmd represents the kbot command
 var kbotCmd = &cobra.Command{
@@ -37,7 +34,7 @@ to quickly create a Cobra application.`,
 		})
 
 		if err != nil {
-			log.Fatalf("Please check TOKEN env variable. %s", err)
+			log.Fatalf("Please check TELE_TOKEN env variable. %s", err)
 			return
 		}
 
