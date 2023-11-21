@@ -17,8 +17,9 @@ test: # test app
 build: get format # Build app. Take three arguments: OS=<os_name> ARCH=<arch_name> NAME=<bin_name>; without arguments default OS and ARCH is linux/amd64 and NAME is kbot 
 	CGO_ENABLED=0 GOOS=${OS} GOARCH=${ARCH} go build -v -o bin/${NAME} -ldflags "-X=github.com/Mardukay/kbot/cmd.AppVersion=${VERSION}"
 
+#	 build image, default image is linux/amd64, take arguments OS=<os_name> ARCH=<arch_name> NAME=<bin_name>
 image:
-	docker build --target builder --target ${OS} --build-arg OS=${OS} --build-arg ARCH=${ARCH} --build-arg NAME=${NAME} -t ${REGISTRY}/${APP}:${VERSION}-${ARCH} . # build image, default image is linux/amd64, take arguments OS=<os_name> ARCH=<arch_name> NAME=<bin_name>
+	docker build --no-cache --progress=plain --target builder --target ${OS} --build-arg OS=${OS} --build-arg ARCH=${ARCH} --build-arg NAME=${NAME} -t ${REGISTRY}/${APP}:${VERSION}-${ARCH} . 
 
 push:
 	docker push ${REGISTRY}/${APP}:${VERSION}-${ARCH}

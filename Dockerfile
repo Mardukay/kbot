@@ -13,11 +13,11 @@ RUN make build OS=${OS} ARCH=${ARCH} NAME=${NAME}
 FROM --platform=$OS/$ARCH $IMAGE as linux
 ARG NAME=kbot
 WORKDIR /
-COPY --from=builder /go/src/app/bin/* .
+COPY --from=builder /go/src/app/bin/$NAME .
 ENTRYPOINT [ "./$NAME" ] 
 
-FROM mcr.microsoft.com/windows/nanoserver:ltsc2022-${ARCH} as windows
-ARG NAME=kbot
-WORKDIR /App
-COPY --from=builder /go/src/app/bin/* /App/
-CMD ["$NAME"]
+FROM --platform=windows/${ARCH} mcr.microsoft.com/windows/nanoserver:ltsc2022-${ARCH} as windows
+ARG NAME=kbot.exe
+WORKDIR /app
+COPY --from=builder /go/src/app/bin/$NAME .
+ENTRYPOINT ["./$NAME"]
