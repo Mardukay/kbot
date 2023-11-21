@@ -3,7 +3,8 @@ REGISTRY:=mardukay
 VERSION:=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 OS:=linux # os name 
 ARCH:=amd64 # architecture name
-NAME:=kbot # app bin name, for windows use <bin_name>.exe
+NAME:=kbot
+EXT:=""
 
 format: # format code 
 	gofmt -s -w ./
@@ -14,12 +15,16 @@ get: # get dependencies
 test: # test app
 	go test -v
 
-build: get format # Build app. Take three arguments: OS=<os_name> ARCH=<arch_name> NAME=<bin_name>; without arguments default OS and ARCH is linux/amd64 and NAME is kbot 
-	CGO_ENABLED=0 GOOS=${OS} GOARCH=${ARCH} go build -v -o bin/${NAME} -ldflags "-X=github.com/Mardukay/kbot/cmd.AppVersion=${VERSION}"
+# Build app. Take three arguments: OS=<os_name> ARCH=<arch_name> NAME=<bin_name>; without arguments default OS and ARCH is linux/amd64 and NAME is kbot. OSs list: darwin(apple), linux, windows 
+build: get format 
+	CGO_ENABLED=0 GOOS=${OS} GOARCH=${ARCH} go build -v -o bin/${NAME}${EXT} -ldflags "-X=github.com/Mardukay/kbot/cmd.AppVersion=${VERSION}"
 
-#	 build image, default image is linux/amd64, take arguments OS=<os_name> ARCH=<arch_name> NAME=<bin_name>
+# Build image, default image is linux/amd64, take arguments OS=<os_name> ARCH=<arch_name> EXT=<extension>(for windows .exe). OSs list: darwin(apple), linux, windows
+# For windows use: make image OS=windows ARCH=amd64 EXT=.exe
+# For linux use: make image OS=linux ARCH=amd64
+# For apple use: make image OS=darwin ARCH=arm64
 image:
-	docker build --build-arg OS=${OS} --build-arg ARCH=${ARCH} --build-arg NAME=${NAME} -t ${REGISTRY}/${APP}:${VERSION}-${ARCH} . 
+	docker build --target=${OS} --build-arg OS=${OS} --build-arg ARCH=${ARCH} --build-arg EXT=${EXT} -t ${REGISTRY}/${APP}:${VERSION}-${OS}_${ARCH} . 
 
 push:
 	docker push ${REGISTRY}/${APP}:${VERSION}-${ARCH}
