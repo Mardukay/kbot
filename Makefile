@@ -3,7 +3,7 @@ REGISTRY:=mardukay
 VERSION:=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 OS:=linux # os name 
 ARCH:=amd64 # architecture name
-NAME:="kbot" # app bin name, for windows use <bin_name>.exe
+NAME:=kbot # app bin name, for windows use <bin_name>.exe
 
 format: # format code 
 	gofmt -s -w ./
@@ -19,7 +19,7 @@ build: get format # Build app. Take three arguments: OS=<os_name> ARCH=<arch_nam
 
 #	 build image, default image is linux/amd64, take arguments OS=<os_name> ARCH=<arch_name> NAME=<bin_name>
 image:
-	docker build --no-cache --progress=plain --target builder --target ${OS} --build-arg OS=${OS} --build-arg ARCH=${ARCH} --build-arg NAME=${NAME} -t ${REGISTRY}/${APP}:${VERSION}-${ARCH} . 
+	docker build --build-arg OS=${OS} --build-arg ARCH=${ARCH} --build-arg NAME=${NAME} -t ${REGISTRY}/${APP}:${VERSION}-${ARCH} . 
 
 push:
 	docker push ${REGISTRY}/${APP}:${VERSION}-${ARCH}

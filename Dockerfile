@@ -1,7 +1,3 @@
-ARG OS=linux
-ARG ARCH=amd64
-ARG IMAGE=alpine:latest
-
 FROM quay.io/projectquay/golang:1.21 as builder
 ARG OS=linux
 ARG ARCH=amd64
@@ -10,14 +6,10 @@ WORKDIR /go/src/app
 COPY . .
 RUN make build OS=${OS} ARCH=${ARCH} NAME=${NAME}
 
-FROM --platform=$OS/$ARCH $IMAGE as linux
+FROM scratch
 ARG NAME=kbot
+ENV name=$NAME
 WORKDIR /
-COPY --from=builder /go/src/app/bin/$NAME .
-ENTRYPOINT [ "./$NAME" ] 
-
-FROM --platform=windows/${ARCH} mcr.microsoft.com/windows/nanoserver:ltsc2022-${ARCH} as windows
-ARG NAME=kbot.exe
-WORKDIR /app
-COPY --from=builder /go/src/app/bin/$NAME .
-ENTRYPOINT ["./$NAME"]
+COPY --from=builder /go/src/app/bin/* .
+COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs
+CMD [ "./kbot" ] 
