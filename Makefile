@@ -24,7 +24,7 @@ build: get format
 # For linux use: make image OS=linux ARCH=amd64
 # For apple use: make image OS=darwin ARCH=arm64
 image:
-	docker build --target=${OS} --build-arg OS=${OS} --build-arg ARCH=${ARCH} --build-arg EXT=${EXT} -t ${REGISTRY}/${APP}:${VERSION}-${OS}_${ARCH} . 
+	docker build --target=${OS} --build-arg OS=${OS} --build-arg ARCH=${ARCH} --build-arg EXT=${EXT} -t ${REGISTRY}/${APP}:${VERSION}-${ARCH} . 
 
 push:
 	docker push ${REGISTRY}/${APP}:${VERSION}-${ARCH}
