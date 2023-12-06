@@ -8,19 +8,25 @@ COPY . .
 RUN make build OS=${OS} ARCH=${ARCH} NAME=${NAME} EXT=${EXT}
 
 FROM scratch as linux
+ENV TELE_TOKEN default
 WORKDIR /
 COPY --from=builder /go/src/app/bin/* .
-COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs
-ENTRYPOINT [ "./kbot" ] 
+COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+ENTRYPOINT [ "./kbot" ]
+CMD [ "start" ] 
 
 FROM scratch as windows
+ENV TELE_TOKEN default
 WORKDIR /
 COPY --from=builder /go/src/app/bin/* .
-COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs
+COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 ENTRYPOINT [ "./kbot.exe" ] 
+CMD [ "start" ] 
 
 FROM scratch as darwin
+ENV TELE_TOKEN default
 WORKDIR /
 COPY --from=builder /go/src/app/bin/* .
-COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs
+COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 ENTRYPOINT [ "./kbot" ] 
+CMD [ "start" ] 

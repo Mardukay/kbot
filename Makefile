@@ -31,4 +31,4 @@ push:
 
 clean:
 	rm -rf bin/ 
-	docker rmi $(shell docker images -q mardukay/kbot.git)
+	docker rmi $(shell docker images -q mardukay/kbot)
