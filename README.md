@@ -18,3 +18,6 @@ Set env variable TELE_TOKEN with value that is your telegram bot token
 export TELE_TOKEN="your_teletoken" 
 
 ./kbot start
+
+Helm installation
+helm install --set secret.tokenKey="telegrambot_token" "app_name" https://github.com/Mardukay/kbot/releases/download/v1.0.5/kbot-0.1.1.tgz
