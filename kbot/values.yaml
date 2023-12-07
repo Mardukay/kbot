@@ -8,11 +8,11 @@ image:
   repository: mardukay
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.4-2812bb8"
+  tag: "v1.0.5-b3db8e7"
   arch: "amd64"
 
 secret:
   tokenName: TELE_TOKEN
   tokenKey: token
-  name: kbot
+
 

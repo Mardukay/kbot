@@ -35,10 +35,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: {{ .Values.secret.tokenName}}
-              valuesFrom:
-                secretKeyRef:
-                  name: {{ .Values.secret.name}}
-                  key: {{ .Values.secret.tokenKey}}
+              value: {{ .Values.secret.tokenKey}}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.volumeMounts }}
