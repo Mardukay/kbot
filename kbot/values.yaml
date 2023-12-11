@@ -9,7 +9,7 @@ image:
   pullPolicy: IfNotPresent
   pullSecret: kbot-pull
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.5-ef0682e"
+  tag: "v1.0.5-6c4bf6f"
   os: "linux"
   arch: "amd64"
 secret:
