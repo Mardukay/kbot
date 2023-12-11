@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   registry: "ghcr.io"
-  repository: "mardukay"
+  repository: "Mardukay"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.0.5-b3db8e7"

@@ -1,6 +1,6 @@
 APP:=$(shell basename -s .git $(shell git remote get-url origin))
 REGISTRY:=ghcr.io
-REPOSITORY=mardukay
+REPOSITORY=Mardukay
 VERSION:=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 OS:=linux# os name 
 ARCH:=amd64# architecture name
