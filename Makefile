@@ -1,10 +1,10 @@
 APP:=$(shell basename -s .git $(shell git remote get-url origin))
-REGISTRY:="ghcr.io"
-REPOSITORY="mardukay"
+REGISTRY:=ghcr.io
+REPOSITORY=mardukay
 VERSION:=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-OS:="linux"# os name 
-ARCH:="amd64"# architecture name
-NAME:="kbot"
+OS:=linux# os name 
+ARCH:=amd64# architecture name
+NAME:=kbot
 EXT:=""
 
 format: # format code 
@@ -25,10 +25,10 @@ build: get format
 # For linux use: make image OS=linux ARCH=amd64
 # For apple use: make image OS=darwin ARCH=arm64
 image:
-	docker build --target=${OS} --build-arg OS=${OS} --build-arg ARCH=${ARCH} --build-arg EXT=${EXT} -t ${REGISTRY}/${REPOSITORY}/${APP}:${VERSION}-${OS}-${ARCH} . 
+	docker build --target=${OS} --build-arg OS=${OS} --build-arg ARCH=${ARCH} --build-arg EXT=${EXT} -t ${REPOSITORY}/${APP}:${VERSION}-${OS}-${ARCH} . 
 
 push:
-	docker push ${REGISTRY}/${APP}:${VERSION}-${ARCH}
+	docker push ${REGISTRY}/${REPOSITORY}/${APP}:${VERSION}-${OS}-${ARCH}
 
 clean:
 	rm -rf bin/ 
