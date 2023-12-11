@@ -26,8 +26,8 @@ jobs:
                 username: ${{ github.actor }}
                 password: ${{ secrets.REGISTRY_TOKEN }}
             
-            #- name: Build&Push
-            #  env:
-            #    APP: "kbot"
-            #    REGISTRY: ghcr.io
-            #  run: make image push
+            - name: Build&Push
+              env:
+                APP: "kbot"
+                REGISTRY: ${{ env.REGISTRY }}
+              run: make image push
