@@ -7,6 +7,7 @@ image:
   registry: "ghcr.io"
   repository: "mardukay"
   pullPolicy: IfNotPresent
+  pullSecret: secret/argocd
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.0.5-999a660"
   os: "linux"
