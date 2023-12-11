@@ -9,7 +9,7 @@ image:
   pullPolicy: IfNotPresent
   pullSecret: secret/argocd
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.5-e4ec4ec"
+  tag: "v1.0.5-ef0682e"
   os: "linux"
   arch: "amd64"
 secret:
