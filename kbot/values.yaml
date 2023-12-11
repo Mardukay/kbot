@@ -6,9 +6,6 @@ replicaCount: 1
 image:
   registry: "ghcr.io"
   repository: "mardukay/kbot"
-  pullPolicy: IfNotPresent
-  pullSecret: kbot-pull
-  # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.0.5-5b0a43c"
   os: "linux"
   arch: "amd64"
