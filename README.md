@@ -26,4 +26,5 @@ TODO:
 Update readme
   - add instruction for helm
   - add github action workflow diagram
+  - add instruction for imagepull secret
 
