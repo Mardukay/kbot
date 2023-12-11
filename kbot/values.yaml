@@ -7,7 +7,7 @@ image:
   registry: "ghcr.io"
   repository: "mardukay"
   pullPolicy: IfNotPresent
-  pullSecret: secret/argocd
+  pullSecret: kbot-pull
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.0.5-ef0682e"
   os: "linux"
