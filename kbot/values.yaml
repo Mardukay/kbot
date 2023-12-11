@@ -8,7 +8,7 @@ image:
   repository: "mardukay"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.5-27372f2"
+  tag: "v1.0.5-569c640"
   os: "linux"
   arch: "amd64"
 secret:
