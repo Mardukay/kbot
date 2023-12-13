@@ -5,6 +5,7 @@ pipeline {
     choice(name: 'ARCH', choices: ['amd64', 'arm64'], description: 'Choose the architecture')
   }
   environment {
+    OS = "${params.OS}"
     ARCH = "${params.ARCH}"
   }
   stages {
@@ -23,29 +24,15 @@ pipeline {
       steps {
         script {
           // Check if OS is windows
-          when {
-            expression { params.OS == 'windows' }
+          if (params.OS == "windows") {
+            echo "Build for platform ${params.OS}"
+            echo "Build for arch: ${params.ARCH}"
+            sh 'make image OS=windows ARCH=$ARCH EXT=.exe'
+          } else {
+            echo "Build for platform ${params.OS}"
+            echo "Build for arch: ${params.ARCH}"
+            sh 'make image OS=$OS ARCH=$ARCH'
           }
-          // Execute make with windows arguments
-          echo "Build for platform ${params.OS}"
-          echo "Build for arch: ${params.ARCH}"
-          sh 'make image OS=windows ARCH=$ARCH EXT=.exe'
-          // Check if OS is linux
-          when {
-            expression { params.OS == 'linux' }
-          }
-          // Execute make with linux arguments
-          echo "Build for platform ${params.OS}"
-          echo "Build for arch: ${params.ARCH}"
-          sh 'make image OS=linux ARCH=$ARCH'
-          // Check if OS is darwin
-          when {
-            expression { params.OS == 'darwin' }
-          }
-          // Execute make with darwin arguments
-          echo "Build for platform ${params.OS}"
-          echo "Build for arch: ${params.ARCH}"
-          sh 'make image OS=darwin ARCH=$ARCH'
         }
       }
     }
