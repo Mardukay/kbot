@@ -3,16 +3,12 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
-
 image:
-  repository: mardukay/kbot
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.5-b3db8e7"
+  registry: "ghcr.io"
+  repository: "mardukay/kbot"
+  tag: "v1.0.5-6f2e87b"
+  os: "linux"
   arch: "amd64"
-
 secret:
   tokenName: TELE_TOKEN
   tokenKey: token
-
-
