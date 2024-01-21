@@ -14,6 +14,7 @@ get: # get dependencies
 	go get
 
 test: # test app
+    go get
 	go test -v
 
 # Build app. Take three arguments: OS=<os_name> ARCH=<arch_name> NAME=<bin_name>; without arguments default OS and ARCH is linux/amd64 and NAME is kbot. OSs list: darwin(apple), linux, windows 
