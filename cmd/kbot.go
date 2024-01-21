@@ -22,7 +22,7 @@ import (
 
 var (
 	// TeleToken bot
-	TeleToken   = os.Getenv("TELE_TOKEN")
+	TeleToken = os.Getenv("TELE_TOKEN")
 	// MetricsHost exporter host:port
 	MetricsHost = os.Getenv("METRICS_HOST")
 )
@@ -41,7 +41,7 @@ func initMetrics(ctx context.Context) {
 	// labels/tags/resources that are common to all metrics.
 	resource := resource.NewWithAttributes(
 		semconv.SchemaURL,
-		semconv.ServiceNameKey.String(fmt.Sprintf("kbot_%s", appVersion)),
+		semconv.ServiceNameKey.String(fmt.Sprintf("kbot_%s", AppVersion)),
 	)
 
 	// Create a new MeterProvider with the specified resource and reader
@@ -93,7 +93,7 @@ to quickly create a Cobra application.`,
 			logger.Fatal().Str("Error", err.Error()).Msg("Please check TELE_TOKEN")
 			return
 		} else {
-			logger.Info().Str("Version", appVersion).Msg("kbot started")
+			logger.Info().Str("Version", AppVersion).Msg("kbot started")
 
 		}
 
@@ -115,7 +115,7 @@ to quickly create a Cobra application.`,
 
 			switch payload {
 			case "hello":
-				err = m.Send(fmt.Sprintf("Hello I'm Kbot %s!", appVersion))
+				err = m.Send(fmt.Sprintf("Hello I'm Kbot %s!", AppVersion))
 
 			case "red", "amber", "green":
 
