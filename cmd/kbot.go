@@ -114,7 +114,7 @@ to quickly create a Cobra application.`,
 
 func init() {
 	ctx := context.Background()
-	initMetrics(ctx
+	initMetrics(ctx)
 	rootCmd.AddCommand(kbotCmd)
 
 	// Here you will define your flags and configuration settings.
