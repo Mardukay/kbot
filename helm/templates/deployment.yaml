@@ -31,3 +31,5 @@ spec:
               secretKeyRef:
                 key: {{ .Values.secret.key }}
                 name: {{ .Values.secret.name }}
+          - name: {{ .Values.metrichost.env }}
+            value: {{ .Values.metrichost.key }}

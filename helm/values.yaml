@@ -15,3 +15,7 @@ secret:
   key: "token"
 securityContext:
   privileged: true
+metrichost:
+  name: "otpl"
+  env: "METRICS_HOST"
+  key: "metric"
